@@ -1,0 +1,4 @@
+# Project exclude paths
+/bug-application/target/
+/bug-repository/target/
+/bug-service/target/
