@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 public class DesignerBug extends BaseEntity {
     private String designerVersion; // 问题版本
+    private String funcId; // 功能点ID
     private String publishVersion; // 发布版本号
     private String title;
     private String userId;

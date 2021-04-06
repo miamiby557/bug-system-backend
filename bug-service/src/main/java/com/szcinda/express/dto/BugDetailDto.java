@@ -11,6 +11,7 @@ import java.util.List;
 public class BugDetailDto implements Serializable {
     private String id;
     private String designerVersion;
+    private String funcId; // 功能点ID
     private LocalDateTime createTime;
     private String title;
     private String userId;
