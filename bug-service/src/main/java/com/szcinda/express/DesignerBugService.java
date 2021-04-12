@@ -20,6 +20,8 @@ public interface DesignerBugService {
 
     void reAssign(BugAssignDto assignDto);
 
+    void batchAssign(BugAssignDto assignDto);
+
     List<DesignerBug> countByWeekFinished(BugType type);
 
     List<DesignerBug> countMyJobByWeekFinished(String userId);

@@ -113,6 +113,26 @@ public class DesignerBugServiceImpl implements DesignerBugService {
     }
 
     @Override
+    public void batchAssign(BugAssignDto assignDto) {
+        User assigner = userRepository.findOne(assignDto.getUserId());
+        User reviewer = userRepository.findOne(assignDto.getReviewUserId());
+        assignDto.getBugIds().forEach(bugId->{
+            DesignerBug designerBug = designerBugRepository.findOne(assignDto.getBugId());
+            designerBug.setReviewUserId(reviewer.getId());
+            designerBug.setReviewUserName(reviewer.getName());
+            designerBug.setBugStatus(BugStatus.UNRESOLVED);
+            designerBugRepository.save(designerBug);
+            BugLog bugLog = new BugLog();
+            bugLog.setId(snowFlakeFactory.nextId());
+            bugLog.setBugId(designerBug.getId());
+            bugLog.setUserId(assigner.getId());
+            bugLog.setUserName(assigner.getName());
+            bugLog.setOperation("在时间 " + LocalDateTime.now().format(formatter) + " 由 " + assigner.getName() + " 把此任务重新指派给 " + reviewer.getName());
+            bugLogRepository.save(bugLog);
+        });
+    }
+
+    @Override
     public List<DesignerBug> countByWeekFinished(BugType type) {
         LocalDate now = LocalDate.now();
         // 所在周开始时间

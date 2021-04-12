@@ -82,6 +82,12 @@ public class OCBugController {
         return Result.success();
     }
 
+    @PostMapping("batchAssign")
+    public Result<String> batchAssign(@RequestBody BugAssignDto assignDto){
+        designerBugService.batchAssign(assignDto);
+        return Result.success();
+    }
+
     @GetMapping("getById/{bugId}")
     public Result<BugDetailDto> getById(@PathVariable String bugId){
         return Result.success(designerBugService.findById(bugId));
