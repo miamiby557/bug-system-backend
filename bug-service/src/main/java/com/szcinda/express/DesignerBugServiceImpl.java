@@ -117,7 +117,7 @@ public class DesignerBugServiceImpl implements DesignerBugService {
         User assigner = userRepository.findOne(assignDto.getUserId());
         User reviewer = userRepository.findOne(assignDto.getReviewUserId());
         assignDto.getBugIds().forEach(bugId->{
-            DesignerBug designerBug = designerBugRepository.findOne(assignDto.getBugId());
+            DesignerBug designerBug = designerBugRepository.findOne(bugId);
             designerBug.setReviewUserId(reviewer.getId());
             designerBug.setReviewUserName(reviewer.getName());
             designerBug.setBugStatus(BugStatus.UNRESOLVED);
